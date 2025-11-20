@@ -4,22 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('login-form');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function login(Request $request)
     {
-        //
+         $request->validate([
+            'username' => 'required',
+            'password' => 'required|min:3|regex:/[A-Z]/'
+        ], [
+            'username.required' => 'Username wajib diisi.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 3 karakter.',
+            'password.regex' => 'Password harus mengandung huruf kapital.'
+        ]);
+
+        // Jika username dan password sesuai
+        if ($request->username === 'Admin' && $request->password === 'Admin123') {
+            return redirect('/success')->with('message', 'Login berhasil!');
+        }
+
+        // Jika tidak sesuai
+        return back()->withErrors(['msg' => 'Username atau password salah.']);
     }
 
     /**
@@ -27,13 +43,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $data['nama']  = $request->nama;
-        $data['email']  = $request->email;
-        $data['pertanyaan'] = $request->pertanyaan;
-
-        return view('home-question-respon', $data);
-    
+        //
     }
 
     /**

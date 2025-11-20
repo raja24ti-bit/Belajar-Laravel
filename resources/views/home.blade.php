@@ -1,50 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Laravel App</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
     <style>
         body {
             font-family: 'Arial', sans-serif;
         }
-
         .navbar-brand {
             font-weight: bold;
         }
-
         .navbar {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .hero-section {
             background-color: #3E97FF;
             color: white;
             padding: 50px 0;
             text-align: center;
         }
-
         .hero-section h1 {
             font-size: 3rem;
         }
-
         .card {
             margin-top: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         .footer {
             margin-top: 50px;
             padding: 20px 0;
             background-color: #f8f9fa;
             text-align: center;
         }
-
         .footer p {
             margin: 0;
             font-size: 0.9rem;
@@ -52,15 +44,12 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="Logo">
-            <a class="navbar-brand" href="#" >My App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <img class="logo" src="{{ asset('assets/images/logo.jpg') }}" alt="Logo">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -85,8 +74,9 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="display-6 mb-2">{{ $username }}</h1>
-            <p class="lead mb-0">{{ $last_login }}</p>
+            <h1 class="font-custom">Welcome to My App Raja Muiz </h1>
+            <p class="lead">A simple and elegant app using Bootstrap 5 and Laravel Blade</p>
+            <a href="#content" class="btn btn-light btn-lg mt-3">Learn More</a>
         </div>
     </section>
 
@@ -96,10 +86,8 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title font-custom" >About Our Application</h5>
-                        <p class="card-text">Our application provides a clean and intuitive interface, allowing users to
-                            navigate easily and perform tasks efficiently. Built with Laravel and Bootstrap, it offers
-                            flexibility and responsiveness.</p>
+                        <h5 class="card-title">About Our Application</h5>
+                        <p class="card-text">Our application provides a clean and intuitive interface, allowing users to navigate easily and perform tasks efficiently. Built with Laravel and Bootstrap, it offers flexibility and responsiveness.</p>
                         <a href="#" class="btn btn-primary">Explore More</a>
                     </div>
                 </div>
@@ -108,36 +96,30 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Form Pertanyaan</h5>
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        @if (session('info'))
-                            <div class="alert alert-info">
-                                {!! session('info') !!}
-                            </div>
-                        @endif
+                        ...
+                    <h5 class="card-title">Form Pertanyaan</h5>
+
+                    @if (session('info'))
+                    <div class="alert alert-info">
+                        {!! session('info') !!}
+                    </div>
+                    @endif
                         <form action="{{ route('question.store') }}" method="POST">
-                            @csrf
+                        @csrf
+...
                             <div class="mb-3">
-                                <label for="nama" class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama" value = "{{ old('nama') }}">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" >
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" name="email" value = "{{ old('email') }}">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" >
                             </div>
                             <div class="mb-3">
-                                <label for="pertanyaan" class="form-label">Pertanyaan</label>
-                                <textarea class="form-control" rows="4" name="pertanyaan">{{ old('pertanyaan') }}</textarea>
+                                <label for="Pertanyaan" class="form-label">Pertanyaan</label>
+                                <input type="Pertanyaan" class="form-control" id="Pertanyaan" name="Pertanyaan" >
                             </div>
-                            <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -155,5 +137,4 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

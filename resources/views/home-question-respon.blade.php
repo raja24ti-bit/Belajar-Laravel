@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,7 +51,7 @@
 <body>
 
     <div class="thankyou-container">
-        <h2>Terima Kasih, {{$nama}} 🎉</h2>
+        <h2>Terima Kasih, {{$nama}}! 🎉</h2>
         <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
 
         <blockquote>

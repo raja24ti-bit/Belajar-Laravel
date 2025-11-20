@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <!DOCTYPE html>
 <html lang="en">
 
@@ -351,4 +355,8 @@
     <script src="{{ asset('assets-admin/js/volt.js') }}"></script>
 </body>
 
+<<<<<<< Updated upstream
 </html>
+=======
+</html>
+>>>>>>> Stashed changes
