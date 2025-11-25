@@ -1,7 +1,6 @@
 @extends('admin.layout.app')
-@section('title','List user')
-@section('content')
 
+@section('content')
     {{-- Content --}}
     <div class="py-4">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -51,8 +50,7 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->password }}</td>
-                                        <td><a href="{{ route('user.edit', $item->id) }}"
-                                                class="btn btn-info btn-sm ">
+                                        <td><a href="{{ route('user.edit', $item->id) }}" class="btn btn-info btn-sm ">
                                                 <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
                                                     stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -62,8 +60,8 @@
                                                 </svg>
                                                 Edit
                                             </a>
-                                            <form action="{{ route('user.destroy', $item->id) }}"
-                                                method="POST" style="display:inline">
+                                            <form action="{{ route('user.destroy', $item->id) }}" method="POST"
+                                                style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -80,13 +78,16 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                @if(session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                             </tbody>
                         </table>
+                        <div class="mt-3">
+                            {{ $datauser->links('pagination::bootstrap-5') }}
+                        </div>
                     </div>
                 </div>
             </div>

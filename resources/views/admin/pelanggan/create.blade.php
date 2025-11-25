@@ -1,6 +1,5 @@
-<<<<<<< Updated upstream
 @extends('admin.layout.app')
-@section('title', 'Tambah Pelanggan')
+
 @section('content')
     <div class="py-4">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -97,11 +96,7 @@
             </div>
         </div>
     </div>
-@endsection
-=======
-@extends('admin.template')
-@section('title','Tambah Pelanggan')
-@section('content')
+
         <div class="py-4">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -194,4 +189,3 @@
             </div>
         </div>
 @endsection
->>>>>>> Stashed changes

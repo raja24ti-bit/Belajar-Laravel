@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -13,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['datauser'] = User::all();
+        $data['datauser'] = User::paginate(10)->onEachSide(2);
         return view('admin.user.index', $data);
     }
 
@@ -33,8 +32,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
+        $data['name']     = $request->name;
+        $data['email']    = $request->email;
         $data['password'] = $request->password;
 
         user::create($data);
@@ -64,10 +63,10 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user_id = $id;
-        $user = user::findOrFail($user_id);
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user_id        = $id;
+        $user           = user::findOrFail($user_id);
+        $user->name     = $request->name;
+        $user->email    = $request->email;
         $user->password = $request->password;
         $user->save();
         return redirect()->route('user.index')->with('success', 'Perubahan Data Berhasil!');
@@ -77,7 +76,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user =  user::findOrFail($id);
+        $user = user::findOrFail($id);
         $user->delete();
         return redirect()->route('user.index')->with('success', 'Data berhasil dihapus');
     }
@@ -85,17 +84,17 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email'    => 'required',
+            'password' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return back()->with('error', 'Email tidak ditemukan.');
         }
 
-        if (!Hash::check($request->password, $user->password)) {
+        if (! Hash::check($request->password, $user->password)) {
             return back()->with('error', 'Password salah.');
         }
         session(['user_id' => $user->id]);

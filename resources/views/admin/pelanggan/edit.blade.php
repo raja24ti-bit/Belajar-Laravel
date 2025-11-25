@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Edit Pelanggan')
+
 @section('content')
     <div class="py-4">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -65,7 +65,6 @@
                                         <option value="">-- Pilih --</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                             </div>

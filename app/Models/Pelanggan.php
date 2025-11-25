@@ -1,14 +1,14 @@
 <?php
-
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Pelanggan extends Model
 {
-    protected $table = 'pelanggan';
+    protected $table      = 'pelanggan';
     protected $primaryKey = 'pelanggan_id';
-    protected $fillable = [
+    protected $fillable   = [
         'first_name',
         'last_name',
         'birthday',
@@ -16,4 +16,39 @@ class Pelanggan extends Model
         'email',
         'phone',
     ];
+
+    public function scopeFilter(Builder $query, $request, array $filterableColumns): Builder
+    {
+        foreach ($filterableColumns as $column) {
+            if ($request->filled($column)) {
+                if ($column == 'search') {
+                    // Logika pencarian LIKE untuk multiple column
+                    $query->where(function ($q) use ($request) {
+                        $searchTerm = '%' . $request->input('search') . '%';
+
+                        $q->where('first_name', 'like', $searchTerm)
+                            ->orWhere('last_name', 'like', $searchTerm)
+                            ->orWhere('email', 'like', $searchTerm);
+                    });
+                    
+                } else {
+                    // Filter biasa (gender)
+                    $query->where($column, $request->input($column));
+                }
+            }
+        }
+        return $query;
+    }
+
+    public function scopeSearch($query, $request, array $columns)
+    {
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request, $columns) {
+                foreach ($columns as $column) {
+                    $q->orWhere($column, 'LIKE', '%' . $request->search . '%');
+                }
+            });
+        }
+    }
+
 }

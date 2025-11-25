@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
 class PelangganController extends Controller
@@ -9,10 +9,17 @@ class PelangganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['dataPelanggan'] = Pelanggan::pagination(10)->onEachSide(2) ();
-        return view('admin.pelanggan.index',$data);
+        $filterableColumns = ['gender', 'search'];
+        $searchableColumns = ['first_name', 'last_name', 'email'];
+
+        $pageData['dataPelanggan'] = Pelanggan::filter($request, $filterableColumns)
+            ->search($request, $searchableColumns) // <-- tambah ini
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.pelanggan.index', $pageData);
     }
 
     /**
@@ -29,17 +36,17 @@ class PelangganController extends Controller
     public function store(Request $request)
     {
         //dd($request->all())
-		
-		$data['first_name'] = $request->first_name;
-		$data['last_name'] = $request->last_name;
-		$data['birthday'] = $request->birthday;
-		$data['gender'] = $request->gender;
-		$data['email'] = $request->email;
-		$data['phone'] = $request->phone;
-		
-		Pelanggan::create($data);
-		
-		return redirect()->route('pelanggan.index')->with('success','Penambahan Data Berhasil!');
+
+        $data['first_name'] = $request->first_name;
+        $data['last_name']  = $request->last_name;
+        $data['birthday']   = $request->birthday;
+        $data['gender']     = $request->gender;
+        $data['email']      = $request->email;
+        $data['phone']      = $request->phone;
+
+        Pelanggan::create($data);
+
+        return redirect()->route('pelanggan.index')->with('success', 'Penambahan Data Berhasil!');
     }
 
     /**
