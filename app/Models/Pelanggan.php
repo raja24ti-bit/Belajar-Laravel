@@ -21,20 +21,7 @@ class Pelanggan extends Model
     {
         foreach ($filterableColumns as $column) {
             if ($request->filled($column)) {
-                if ($column == 'search') {
-                    // Logika pencarian LIKE untuk multiple column
-                    $query->where(function ($q) use ($request) {
-                        $searchTerm = '%' . $request->input('search') . '%';
-
-                        $q->where('first_name', 'like', $searchTerm)
-                            ->orWhere('last_name', 'like', $searchTerm)
-                            ->orWhere('email', 'like', $searchTerm);
-                    });
-                    
-                } else {
-                    // Filter biasa (gender)
-                    $query->where($column, $request->input($column));
-                }
+                $query->where($column, $request->input($column));
             }
         }
         return $query;
@@ -50,5 +37,4 @@ class Pelanggan extends Model
             });
         }
     }
-
 }

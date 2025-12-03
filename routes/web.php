@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QuestionController;
+use ProfileController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PelangganController;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MahasiswaController;
+
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\MatakuliahController;
 
 Route::get('/pcr', function () {
     return 'Selamat datang di website PCR!';
@@ -56,6 +56,11 @@ Route::get('/success', function () {
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-Route::resource('pelanggan', PelangganController::class);
+Route::resource('pelanggan', PelangganController::class); 
+Route::post('/pelanggan/upload-files', [PelangganController::class, 'uploadFiles'])
+    ->name('pelanggan.uploadFiles');
+Route::delete('/pelanggan/file/{id}', [PelangganController::class, 'deleteFile']
+)->name('pelanggan.file.delete');
+
 Route::resource('user', UserController::class);
 Route::resource('profile', ProfileController::class);

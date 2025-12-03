@@ -46,6 +46,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
+
                 <form action={{ route('user.store') }} method="POST">
                     @csrf
                     <div class="row mb-4">
@@ -77,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
 
